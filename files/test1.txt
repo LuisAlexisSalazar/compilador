@@ -1,0 +1,19 @@
+"ga"
+#Comentario
+str function (num parametro1 ; str parametro2)
+
+    while (parametro1 >= q)
+
+        print(parametro1)
+        parametro1 = parametro1-1;
+    endwhile
+
+
+    return parametro2;
+endfunction
+
+
+num var = 3.55;
+str string = "Hola \cmundo\c";
+
+print(function(var,string));
