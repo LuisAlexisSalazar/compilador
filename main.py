@@ -12,34 +12,8 @@ def menu():
     option = "1"
     if option == "1":
         nameFile = "test1.txt"
-        descriptor = descriptorClass(nameFile)
-
-        char = descriptor.Getchar()
-
-        while char != '':
-
-            if char == '\n':
-                descriptor.addCountLine()
-                char = descriptor.Getchar()
-
-            if char == ' ' or char == '\t':
-                char = descriptor.Getchar()
-
-            # --detectar comentario
-            if char == '#':
-                descriptor.addCountLine()
-                char = descriptor.Getchar()
-
-            # --detectar simbolos
-            if char == ">":
-                if descriptor.Peekchar() == '=':
-                    print("TOKEN >=")
-                else:
-                    print("TOKEN >")
-
-            char = descriptor.Getchar()
-            # if char == "\"":
-            #     print("STR")
+        for token in analyze(nameFile):
+            print(token)
 
 
     elif option == "2":
@@ -59,4 +33,5 @@ if __name__ == '__main__':
     # for senum in EnumTypeToken:
     #     print('{:15} = {}'.format(senum.name, senum.lexema))
     menu()
+    # print(keywords.index("else"))
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
