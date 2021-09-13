@@ -57,6 +57,7 @@ def analyze(nameFile):
             char = storeChar[0]
             continue
         else:
+            error("Error en la linea " + str(descriptor.line + 1) + " : Error de simbolo no reconocidoo -> " + char)
             char = descriptor.Getchar()
 
     return setTokens

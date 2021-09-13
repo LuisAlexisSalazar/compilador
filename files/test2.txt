@@ -1,18 +1,15 @@
 #Comentario
-str function (num parametro , str parametro)
+str function (num a , str b)
+	str var = "H\"o\"la"
+	a   3.r4
+	b = 3.55
+    if a & b
+        rotate
+    endif
+    if x \ y
+        a = 2 * b
+    endif
 
-    while (parametro >= q)
-
-        print(parametro)
-        parametro = parametro - 1
-    endwhile
-	"H\"o\"la"
-
-    return parametro
 endfunction
 
 
-num var = 33.ll
-str string = "Hola \"mundo\""
-
-print(function(var,string))

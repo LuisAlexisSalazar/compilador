@@ -14,6 +14,7 @@ def menu():
         option = input("Escriba una opción: ")
         if option == "1":
             nameFile = "test1.txt"
+            analyze(nameFile)
             for token in analyze(nameFile):
                 print(token)
 

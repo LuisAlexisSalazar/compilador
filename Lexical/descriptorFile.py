@@ -11,7 +11,6 @@ class descriptorClass:
 
         try:
             path = 'files/' + self.nameFile
-            # if existFile(path):
             self.fileDescriptor = open(path, 'r')
             self.countLines = len(open(path).readlines())
 

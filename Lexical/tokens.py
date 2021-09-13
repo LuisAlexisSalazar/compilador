@@ -129,7 +129,7 @@ def identifyNumber(descriptor, storeChar, setTokens):
             Bool = True
 
         elif nextChar.isalpha():
-            error("Error en la linea " + str(descriptor.line))
+            error("Error en la linea " + str(descriptor.line) + ": Error de reconomiento de numero")
             nextChar = descriptor.Getchar()
             while nextChar != " " and nextChar != "\n":
                 nextChar = descriptor.Getchar()
@@ -155,12 +155,12 @@ def identifyNumber(descriptor, storeChar, setTokens):
 
             # Error ejemplo : var = 33.
             elif (nextChar == " " or nextChar == "\n") and not minimuDecimal:
-                error("Error en la linea " + str(descriptor.line))
+                error("Error en la linea " + str(descriptor.line) + ": Error de reconomiento de numero")
                 storeChar[0] = nextChar
                 Bool = True
 
             elif nextChar.isalpha():
-                error("Error en la linea " + str(descriptor.line))
+                error("Error en la linea " + str(descriptor.line) + ": Error de reconomiento de numero")
                 nextChar = descriptor.Getchar()
                 while nextChar != " " and nextChar != "\n":
                     nextChar = descriptor.Getchar()
