@@ -1,22 +1,4 @@
-from utils import *
-
-
-# ? blank line = '\n'
-def createFile():
-    nameFile = input("Nombre del archivo:")
-    file = open("files/" + nameFile + ".txt", "w+")
-
-    writeData = None
-    i = 0
-    print("Para cerrar y guardar el archivo puedes escribir ':q' ")
-
-    while (True):
-        writeData = input("Linea " + str(i) + ":")
-        if writeData == ":q":
-            break
-        file.write(writeData + "\n")
-        i += 1
-    file.close()
+from tools.tool import *
 
 
 class descriptorClass:
@@ -26,14 +8,16 @@ class descriptorClass:
 
     def __init__(self, nameFile):
         self.nameFile = nameFile
-        path = 'files/' + self.nameFile
 
-        if existFile(path):
+        try:
+            path = 'files/' + self.nameFile
+            # if existFile(path):
             self.fileDescriptor = open(path, 'r')
             self.countLines = len(open(path).readlines())
 
-        else:
+        except FileNotFoundError:
             error("No existe el archivo")
+            raise FileNotFoundError
 
     def Getchar(self):
         self.pointer += 1

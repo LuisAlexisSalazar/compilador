@@ -7,12 +7,12 @@ str function (num parametro , str parametro)
         parametro = parametro - 1
     endwhile
 	"H\"o\"la"
-	
+
     return parametro
 endfunction
 
 
-num var = 33.55
+num var = 33.ll
 str string = "Hola \"mundo\""
 
 print(function(var,string))

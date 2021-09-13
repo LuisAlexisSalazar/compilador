@@ -1,22 +1,26 @@
-from descriptorFile import *
+from .descriptorFile import *
 from enum import Enum
 
 operatorsTag = ["OP-SUM", "OP-RESTA", "OP-DIV", "OP-INTDIV", "OPC-L", "OPC-G", "OP-MULT", "OP-POWER", "OPL-N", "OP-MOD",
                 "OP-ASSIGN",
                 "OPC-E", "OPC-LE", "OPC-GE"]
 delimitersTag = ["R-ENDIF", "R-ENDWHILE", "R-ENDFOR", "R-ENDFUNCTION", "R-ENDELSE", "D-C", "D-PL", "D-PR"]
-keywordsTag = ["R-IF", "R-WHILE", "R-FOR", "R-FUNCTION", "R-ELSE", "R-RETURN", "R-VOID"]
-typeDataTag = ["ID", "NUM", "STR"]
-
-typeToken = operatorsTag + delimitersTag + keywordsTag + typeDataTag
+functionsTag = ["F-ROT", "F-CUT", "F-RES", "F-BLUR", "F-GRAY", "F-PRINT"]
+keywordsTag = ["R-IF", "R-WHILE", "R-FOR", "R-FUNCTION", "R-ELSE", "R-RETURN", "R-VOID", "STR", "NUM"]
+keywordsTag += functionsTag
+valueTag = ["V-STR", "V-NUM"]
+idTag = ["ID"]
+typeToken = operatorsTag + delimitersTag + keywordsTag + valueTag + idTag + functionsTag
 valueToken = list(range(len(typeToken)))
 
 typeTokenDict = dict(zip(typeToken, valueToken))
 
 EnumTypeToken = Enum('EnumTypeToken', typeTokenDict)
-
-keywords = ["if", "while", "for", "function", "else", "return", "void"]
+functionsNames = ["rotate", "cut", "resize", "blur", "grayImg", "print"]
+keywords = ["if", "while", "for", "function", "else", "return", "void", "str", "num"]
+keywords += functionsNames
 delimters = ["endif", "endwhile", "endfor", "endfunction", "endelse", ",", "(", ")"]
+functionsNames = ["rotate"]
 ids = []
 
 
@@ -119,7 +123,7 @@ def identifyNumber(descriptor, storeChar, setTokens):
             nextChar = descriptor.Getchar()
 
         if nextChar == " " or nextChar == "\n":
-            token = tokenClass((EnumTypeToken['NUM']), char)
+            token = tokenClass((EnumTypeToken['V-NUM']), char)
             setTokens.append(token)
             storeChar[0] = nextChar
             Bool = True
@@ -189,7 +193,7 @@ def identifyStr(descriptor, storeChar, setTokens):
 
         char += nextChar
         if nextChar == "\"":
-            token = tokenClass((EnumTypeToken['STR']), char)
+            token = tokenClass((EnumTypeToken['V-STR']), char)
             setTokens.append(token)
             storeChar[0] = descriptor.Getchar()
             Bool = True
@@ -213,95 +217,65 @@ def identifyDelimSymbol(descriptor, char, setTokens):
 
 def identifyKeyboards(descriptor, storeChar, setTokens):
     char = storeChar[0]
+    pointerBefore = descriptor.fileDescriptor.tell()
+
     if char.isalpha():
         nexChar = descriptor.Getchar()
-        while nexChar != "" and nexChar != "\n" and nexChar != " " and nexChar != "\t":
+        # while nexChar != "" and nexChar != "\n" and nexChar != " " and nexChar != "\t":
+        while nexChar.isnumeric() or (
+                nexChar.isalpha() and nexChar != "" and nexChar != "\n" and nexChar != " " and nexChar != "\t"):
             char += nexChar
             nexChar = descriptor.Getchar()
         try:
             indexToken = keywords.index(char)
             token = tokenClass((EnumTypeToken[keywordsTag[indexToken]]), char)
             setTokens.append(token)
-            storeChar[0] = descriptor.Getchar()
+            # storeChar[0] = descriptor.Getchar()
+            storeChar[0] = nexChar
             return True
         except ValueError:
-            storeChar[0] = char
+            descriptor.fileDescriptor.seek(pointerBefore)
+            # storeChar[0] = char
             return False
 
 
 def identifyDelimLetters(descriptor, storeChar, setTokens):
     char = storeChar[0]
-    try:
-        indexToken = delimters.index(char)
-        token = tokenClass((EnumTypeToken[delimitersTag[indexToken]]), char)
-        setTokens.append(token)
-        storeChar[0] = descriptor.Getchar()
-        return True
-    except ValueError:
-        storeChar[0] = char
+    pointerBefore = descriptor.fileDescriptor.tell()
+
+    if char.isalpha():
+        nexChar = descriptor.Getchar()
+        while nexChar != "" and nexChar != "\n" and nexChar != " " and nexChar != "\t":
+            char += nexChar
+            nexChar = descriptor.Getchar()
+        try:
+            indexToken = delimters.index(char)
+            token = tokenClass((EnumTypeToken[delimitersTag[indexToken]]), char)
+            setTokens.append(token)
+            storeChar[0] = descriptor.Getchar()
+            return True
+        except ValueError:
+            descriptor.fileDescriptor.seek(pointerBefore)
+            return False
+    else:
         return False
 
 
 def identifyId(descriptor, storeChar, setTokens):
     char = storeChar[0]
-    try:
-        id
+    # pointerBefore = descriptor.fileDescriptor.tell()
 
+    if char.isalpha():
+        nexChar = descriptor.Getchar()
+        while nexChar.isnumeric() or (
+                nexChar.isalpha() and nexChar != "" and nexChar != "\n" and nexChar != " " and nexChar != "\t"):
+            char += nexChar
+            nexChar = descriptor.Getchar()
 
-def analyze(nameFile):
-    descriptor = descriptorClass(nameFile)
-    char = descriptor.Getchar()
-
-    token = None
-    setTokens = []
-    storeChar = [None]
-    wholeWord = [None]
-
-    while char != '':
-        storeChar[0] = char
-        # print("Linea", descriptor.line, printChar(char))
-
-        if char == '\n':
-            descriptor.addCountLine()
-            char = descriptor.Getchar()
-
-        elif char == ' ' or char == '\t':
-            char = descriptor.Getchar()
-
-        # --detector comentarios
-        elif char == '#':
-            char = descriptor.Getchar()
-            while char != '\n':
-                char = descriptor.Getchar()
-
-        # --detector delitimitadores simbolos como : ( , )
-        elif identifyDelimSymbol(descriptor, char, setTokens):
-            char = descriptor.Getchar()
-            continue
-
-        elif identifyOperator(descriptor, char, setTokens):
-            # print(descriptor.fileDescriptor.tell())
-            char = descriptor.Getchar()
-            # print(descriptor.fileDescriptor.tell())
-            continue
-
-        elif identifyNumber(descriptor, storeChar, setTokens):
-            char = storeChar[0]
-            continue
-
-        elif identifyStr(descriptor, storeChar, setTokens):
-            char = storeChar[0]
-            continue
-
-        elif identifyKeyboards(descriptor, storeChar, setTokens):
-            char = storeChar[0]
-            continue
-
-        elif identifyDelimLetters(descriptor, storeChar, setTokens):
-            char = storeChar[0]
-            continue
-
-        else:
-            char = descriptor.Getchar()
-
-    return setTokens
+        ids.append(char)
+        token = tokenClass((EnumTypeToken["ID"]), char)
+        setTokens.append(token)
+        storeChar[0] = nexChar
+        return True
+    else:
+        return False
