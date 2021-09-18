@@ -11,6 +11,7 @@ def analyze(nameFile):
         return setTokens
 
     char = descriptor.Getchar()
+
     while char != '':
         storeChar[0] = char
         # --detector Salto de linea
@@ -26,6 +27,7 @@ def analyze(nameFile):
             char = descriptor.Getchar()
             while char != '\n':
                 char = descriptor.Getchar()
+            continue
 
         # --detector delitimitadores simbolos : ( , )
         elif identifyDelimSymbol(descriptor, char, setTokens):

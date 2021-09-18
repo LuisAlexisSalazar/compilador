@@ -1,14 +1,14 @@
 from .descriptorFile import *
 from enum import Enum
 
-operatorsTag = ["OP-SUM", "OP-RESTA", "OP-DIV", "OP-INTDIV", "OPC-L", "OPC-G", "OP-MULT", "OP-POWER", "OPL-N", "OP-MOD",
+operatorsTag = ["OP-SUM", "OP-RESTA", "OP-DIV", "OP-INTDIV", "OPC-L", "OPC-G", "OP-MULT", "OP-POWER", "OP-MOD",
                 "OP-ASSIGN",
                 "OPC-E", "OPC-LE", "OPC-GE"]
-delimitersTag = ["R-ENDIF", "R-ENDWHILE", "R-ENDFOR", "R-ENDFUNCTION", "R-ENDELSE", "D-C", "D-PL", "D-PR"]
+delimitersTag = ["R-ENDIF", "R-ENDWHILE", "R-ENDELSE", "R-ENDMAIN", "D-C", "D-PL", "D-PR"]
 functionsTag = ["F-ROT", "F-CUT", "F-RES", "F-BLUR", "F-GRAY", "F-PRINT"]
-keywordsTag = ["R-IF", "R-WHILE", "R-FOR", "R-FUNCTION", "R-ELSE", "R-RETURN", "R-VOID", "STR", "NUM"]
+keywordsTag = ["R-IF", "R-WHILE", "R-ELSE", "R-MAIN"]
 keywordsTag += functionsTag
-valueTag = ["V-STR", "V-NUM"]
+valueTag = ["V-STR", "V-NUM", "V-IMG"]
 idTag = ["ID"]
 typeToken = operatorsTag + delimitersTag + keywordsTag + valueTag + idTag + functionsTag
 valueToken = list(range(len(typeToken)))
@@ -17,9 +17,9 @@ typeTokenDict = dict(zip(typeToken, valueToken))
 
 EnumTypeToken = Enum('EnumTypeToken', typeTokenDict)
 functionsNames = ["rotate", "cut", "resize", "blur", "grayImg", "print"]
-keywords = ["if", "while", "for", "function", "else", "return", "void", "str", "num"]
+keywords = ["if", "while", "else", "main"]
 keywords += functionsNames
-delimters = ["endif", "endwhile", "endfor", "endfunction", "endelse", ",", "(", ")"]
+delimters = ["endif", "endwhile", "endelse", "endmain", ",", "(", ")"]
 functionsNames = ["rotate"]
 ids = []
 
@@ -133,6 +133,8 @@ def identifyNumber(descriptor, storeChar, setTokens):
             nextChar = descriptor.Getchar()
             while nextChar != " " and nextChar != "\n":
                 nextChar = descriptor.Getchar()
+            # ?test
+            descriptor.addCountLine()
             storeChar[0] = nextChar
             Bool = True
 
@@ -156,6 +158,8 @@ def identifyNumber(descriptor, storeChar, setTokens):
             # Error ejemplo : var = 33.
             elif (nextChar == " " or nextChar == "\n") and not minimuDecimal:
                 error("Error en la linea " + str(descriptor.line) + ": Error de reconomiento de numero")
+                # ?test
+                descriptor.addCountLine()
                 storeChar[0] = nextChar
                 Bool = True
 
@@ -164,6 +168,8 @@ def identifyNumber(descriptor, storeChar, setTokens):
                 nextChar = descriptor.Getchar()
                 while nextChar != " " and nextChar != "\n":
                     nextChar = descriptor.Getchar()
+                # ?test
+                descriptor.addCountLine()
                 storeChar[0] = nextChar
                 Bool = True
     return Bool
@@ -201,6 +207,7 @@ def identifyStr(descriptor, storeChar, setTokens):
             error("Error en la linea " + str(descriptor.line))
             storeChar[0] = nextChar
             Bool = True
+            descriptor.addCountLine()
 
     return Bool
 

@@ -1,15 +1,30 @@
 #Comentario
-str function (num a , str b)
-	str var = "H\"o\"la"
-	a   3.r4
-	b = 3.55
-    if a & b
-        rotate
-    endif
-    if x \ y
-        a = 2 * b
-    endif
 
-endfunction
+main
+
+  pixeluser = 500f00
+  nameuser = "Luis"
+
+   if imagen1 == imagen2
+        print ("Tienen la misma cantidad de pixeles")
+   endif
+
+   else
+         if imagen1 > imagen2
+            print ("La imagen1 tiene mas \"pixeles\"")
+        endif
+
+        if imagen1 & imagen2
+             print ("La imagen1 tiene menos \"pixeles\"")
+        endif
+
+   endelse
+
+   if pixeluser \ imagen1
+      print("El usuario" + pixeluser + "tiene mas pixeles")
+   endif
+
+endmain
+
 
 

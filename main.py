@@ -12,16 +12,19 @@ def menu():
 
     while True:
         option = input("Escriba una opción: ")
+
         if option == "1":
             nameFile = "test1.txt"
             analyze(nameFile)
             for token in analyze(nameFile):
                 print(token)
+            break
 
         elif option == "2":
             nameFile = "test2.txt"
             for token in analyze(nameFile):
                 print(token)
+            break
         elif option == "3":
             nameFile = createFile()
             for token in analyze(nameFile):
@@ -39,12 +42,5 @@ def menu():
             print(colored("No ingresaste opción correcta", "red"))
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # print(EnumTypeToken['OP-MOD'])
-    # print(EnumTypeToken.ID)
-    # for senum in EnumTypeToken:
-    #     print('{:15} = {}'.format(senum.name, senum.lexema))
     menu()
-    # print(keywords.index("else"))
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
