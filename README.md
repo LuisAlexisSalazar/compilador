@@ -1,5 +1,7 @@
 # Analizador Léxico
 
+Link de la documentación [Link](https://docs.google.com/document/d/1OchNm_adU2vlnBb6lVnE_Mh0j1aJJL9WR-vSUMOfrKw/edit?usp=sharing)
+
 ## Instalación y Ejecución
 ```sh
 git clone https://github.com/LuisAlexisSalazar/compilador.git
