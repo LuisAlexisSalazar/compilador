@@ -5,12 +5,12 @@ import os
 def error(message):
     print(colored(message, 'red'))
 
+def print_color(message,color):
+    print(colored(message, color))
 
 def existFile(path):
     return os.path.exists(path)
 
-
-# ? blank line = '\n'
 def createFile():
     nameFile = input("Nombre del archivo con extension txt:")
     file = open("files/" + nameFile + ".txt", "w+")

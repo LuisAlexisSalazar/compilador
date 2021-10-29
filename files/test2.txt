@@ -1,30 +1,20 @@
-#Comentario
-
 main
+  #Comentario
+  $
 
-  pixeluser = 500f00
-  nameuser = "Luis"
+  imagen1 = 'imagen1.png
 
-   if imagen1 == imagen2
-        print ("Tienen la misma cantidad de pixeles")
-   endif
+  if ( * )
+        imagen2 == 'imagen2.png'
+        print(image2)
+  else
+        edad = 500f00
+        print(image1)
+  endelse
+  endif
 
-   else
-         if imagen1 > imagen2
-            print ("La imagen1 tiene mas \"pixeles\"")
-        endif
 
-        if imagen1 & imagen2
-             print ("La imagen1 tiene menos \"pixeles\"")
-        endif
-
-   endelse
-
-   if pixeluser \ imagen1
-      print("El usuario" + pixeluser + "tiene mas pixeles")
-   endif
 
 endmain
-
 
 

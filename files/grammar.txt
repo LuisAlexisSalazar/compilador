@@ -1,0 +1,37 @@
+I -> R-MAIN Expr R-ENDMAIN
+Expr -> Term Expr'
+Term -> Factor Term'
+Term -> #
+Term' -> OP-MULT Term
+Term' -> OP-POWER Term
+Term' -> OP-DIV Term
+Term' -> OP-INTDIV Term
+Term' -> OP-SUM Term
+Term' -> OP-RESTA Term
+Term' -> OP-ASSIGN Term
+Term' -> OP-MOD Term
+Term' -> #
+Expr' -> F-ROT D-PL Expr D-PR Expr
+Expr' -> F-CUT D-PL Expr D-PR Expr
+Expr' -> F-RES D-PL Expr D-PR Expr 
+Expr' -> F-BLUR D-PL Expr D-PR Expr
+Expr' -> F-GRAY D-PL Expr D-PR Expr
+Expr' -> F-PRINT D-PL Expr D-PR Expr
+Expr' -> R-IF D-PL exprCond D-PR Expr TermElse Expr
+Expr' -> R-WHILE D-PL exprCond D-PR R-ENDWHILE Expr
+Expr' -> #
+TermElse -> R-ELSE Expr R-ENDELSE R-ENDIF
+TermElse -> R-ENDIF 
+exprCond -> Factor Comp
+Comp -> OPC-L Factor
+Comp -> OPC-G Factor 
+Comp -> OPC-E Factor 
+Comp -> OPC-LE Factor 
+Comp -> OPC-GE Factor 
+Comp -> #
+Factor -> D-PL Expr D-PR
+Factor -> V-NUM
+Factor -> V-IMG
+Factor -> img
+Factor -> ID
+

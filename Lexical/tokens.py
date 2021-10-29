@@ -29,7 +29,15 @@ class tokenClass:
     lexema = None
 
     def __str__(self):
+        # return "(type : " + colored(str(self.type)[14:], 'green') + " lexema : " + colored(self.lexema, 'green') + ")"
+
+        return str(self.type)[14:]
+
+    def print(self):
         return "(type : " + colored(str(self.type)[14:], 'green') + " lexema : " + colored(self.lexema, 'green') + ")"
+
+    def __iter__(self):
+        yield str(self.type)[14:]
 
     def __init__(self, type, lexema):
         self.type = type
@@ -200,6 +208,34 @@ def identifyStr(descriptor, storeChar, setTokens):
         char += nextChar
         if nextChar == "\"":
             token = tokenClass((EnumTypeToken['V-STR']), char)
+            setTokens.append(token)
+            storeChar[0] = descriptor.Getchar()
+            Bool = True
+        elif nextChar == "\n":
+            error("Error en la linea " + str(descriptor.line))
+            storeChar[0] = nextChar
+            Bool = True
+            descriptor.addCountLine()
+
+    return Bool
+
+
+def identifyImg(descriptor, storeChar, setTokens):
+    char = storeChar[0]
+    Bool = False
+    token = None
+    if char == "\'":
+        nextChar = descriptor.Getchar()
+
+        while nextChar != "\'":
+            if nextChar == "\n":
+                break
+            char += nextChar
+            nextChar = descriptor.Getchar()
+
+        char += nextChar
+        if nextChar == "\'":
+            token = tokenClass((EnumTypeToken['V-IMG']), char)
             setTokens.append(token)
             storeChar[0] = descriptor.Getchar()
             Bool = True

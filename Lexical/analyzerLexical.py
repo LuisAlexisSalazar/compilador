@@ -42,6 +42,11 @@ def analyze(nameFile):
         elif identifyNumber(descriptor, storeChar, setTokens):
             char = storeChar[0]
             continue
+        # --imagenes : 'imagen.png'...
+        elif identifyImg(descriptor, storeChar, setTokens):
+            char = storeChar[0]
+            continue
+
         # --Valor-String  : "Hola" " "un" comentario " ...
         elif identifyStr(descriptor, storeChar, setTokens):
             char = storeChar[0]
