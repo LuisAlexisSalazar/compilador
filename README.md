@@ -1,5 +1,7 @@
 # Analizador Léxico
 
+Link de la documentación [Link](https://docs.google.com/document/d/1OchNm_adU2vlnBb6lVnE_Mh0j1aJJL9WR-vSUMOfrKw/edit?usp=sharing)
+
 ## Instalación y Ejecución
 ```sh
 git clone https://github.com/LuisAlexisSalazar/compilador.git
@@ -14,7 +16,7 @@ Consta de 4 opciones:
 - 4: Poner el nombre del archivo ya creado
 - 5: Terminar el programa
 ## Ejemplo 1 sin errores
-[![Analizador-Lexico.png](https://i.postimg.cc/44qy4H5f/Analizador-Lexico.png)](https://postimg.cc/dDRw41pp)
+[![code.png](https://i.postimg.cc/9M2ggqwj/code.png)](https://postimg.cc/NyNx5FxN)
 
 ## Ejemplo 2 con errores aprosito
-[![Errores-Aproposito.png](https://i.postimg.cc/bY16RWv1/Errores-Aproposito.png)](https://postimg.cc/CdLHhvkK)
+[![Test2.png](https://i.postimg.cc/WzbWTL7W/Test2.png)](https://postimg.cc/G8VJxfVG)
