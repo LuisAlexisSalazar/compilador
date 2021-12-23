@@ -1,7 +1,7 @@
 main
   #Comentario
   imagen1 = 'imagen1.png'
-
+   &
   if (image1)
         imagen2 = 'imagen2.png'
         print(image2)

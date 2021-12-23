@@ -54,7 +54,7 @@ def use_ll1(tokens_input):
 if __name__ == '__main__':
     # menu()
 
-    nameFile = "test1.txt"
+    nameFile = "test2.txt"
     tokens = analyze(nameFile)
     tokens_str = []
     for token in tokens:

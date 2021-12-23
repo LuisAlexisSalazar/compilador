@@ -1,0 +1,43 @@
+I -> main Expr endmain
+Expr -> Term Expr'
+Term -> Factor Term'
+Term -> ''
+Term' -> * Term
+Term' -> ^ Term
+Term' -> / Term
+Term' -> // Term
+Term' -> + Term
+Term' -> - Term
+Term' -> = Term
+Term' -> % Term
+Term' -> ''
+Expr' -> rotate ( Expr ) Expr
+Expr' -> cut ( Expr ) Expr
+Expr' -> resize ( Expr ) Expr 
+Expr' -> blur ( Expr ) Expr
+Expr' -> grayImg ( Expr ) Expr
+Expr' -> print ( Expr ) Expr
+Expr' -> size ( Expr ) Expr
+Expr' -> if ( exprCond ) Expr TermElse Expr
+Expr' -> while ( exprCond ) endwhile Expr
+Expr' -> ''
+TermElse -> else Expr endelse endif
+TermElse -> endif 
+exprCond -> Factor Comp
+Comp -> < Factor
+Comp -> > Factor 
+Comp -> == Factor 
+Comp -> <= Factor 
+Comp -> >= Factor 
+Comp -> ''
+Factor -> ( Expr )
+Factor -> number
+Factor -> string
+Factor -> img
+Factor -> id
+
+
+
+
+#Falta agregarlo en los tokens y gramatica
+Expr' -> size D-PL Expr D-PR Expr
